@@ -1,6 +1,13 @@
 import scala.io.Source
 
-val filename = "fileopen.scala"
-for (line <- Source.fromFile(filename).getLines) {
-  println(line)
+object HotelAnalysis extends App {
+  // getResourceAsStream reads file from resources folder
+  val fileStream = getClass.getResourceAsStream("/Hotel_Dataset.csv")
+  val source = Source.fromInputStream(fileStream)
+
+  for (line <- source.getLines()) {
+    println(line)
+  }
+
+  source.close()
 }

@@ -46,8 +46,8 @@ object BestHotelFinder extends App {
     }
   }
 
-  //print the result
-  println("Most Economical Hotel:")
+  //print the result for question 2
+  println("Q1 number 2: Most Economical Hotel:")
   println("Hotel Name   : " + cheapestHotel._2)
   println(f"Booking Price: ${cheapestHotel._3}%.2f SGD")
   println(f"Discount     : ${cheapestHotel._4 * 100}%.0f%%")

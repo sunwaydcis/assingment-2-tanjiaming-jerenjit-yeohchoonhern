@@ -11,7 +11,7 @@ object BestHotelFinder extends App {
   val lines = source.getLines().drop(1).toList
   source.close()  // close file after reading
 
-  // Parse CSV lines into a list of bookings
+  // parse CSV lines into a list of bookings
   var bookings = List.empty[(String, String, Double, Double, Double, Int)] // initialize empty list
 
   for (line <- lines) {

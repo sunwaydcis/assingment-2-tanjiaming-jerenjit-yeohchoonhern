@@ -1,6 +1,5 @@
 import java.io.File
 import scala.io.Source
-import com.github.tototoshi.csv._
 
 // Case class to describe a record
 case class Record(

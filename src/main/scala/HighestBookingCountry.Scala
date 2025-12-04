@@ -1,0 +1,41 @@
+import java.io.File
+import scala.io.Source
+import com.github.tototoshi.csv._
+
+// Case class to describe a record
+case class Record(
+                   id: String, date: String, time: String, customer: String, gender: String,
+                   age: String, originCountry: String, state: String, location: String,
+                   destinationCountry: String, destinationCity: String, noOfPeople: String,
+                   checkinDate: String, noOfDays: String, checkoutDate: String, rooms: String,
+                   hotelName: String, hotelRating: String, paymentMode: String, bankName: String,
+                   bookingPrice: String, discount: String, gst: String, profitMargin: String
+                 )
+
+object HighestBookingCountry {
+  def main(args: Array[String]): Unit = {
+    val file = new File(getClass.getResource("Hotel_Dataset.csv").toURI)
+    val reader = CSVReader.open(file)
+
+    // Read all rows
+    val rows: List[List[String]] = reader.all()
+
+    // Skip header and convert to Record objects
+    val records = rows.tail.map(row => Record(
+      row(0), row(1), row(2), row(3), row(4), row(5), row(6), row(7),
+      row(8), row(9), row(10), row(11), row(12), row(13), row(14), row(15),
+      row(16), row(17), row(18), row(19), row(20), row(21), row(22), row(23)
+    ))
+
+    // Count bookings per origin country
+    val countryCounts = records
+      .groupBy(_.originCountry)
+      .view.mapValues(_.size).toMap
+
+    // Find country with max bookings
+    val (topCountry, count) = countryCounts.maxBy(_._2)
+    println(s"Country with the highest number of bookings: $topCountry ($count bookings)")
+
+    reader.close()
+  }
+}

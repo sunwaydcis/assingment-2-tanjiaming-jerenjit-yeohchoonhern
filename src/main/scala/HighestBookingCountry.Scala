@@ -13,7 +13,7 @@ case class Record(
 
 object HighestBookingCountry {
   def main(args: Array[String]): Unit = {
-    val file = new File(getClass.getResource("Hotel_Dataset.csv").toURI)
+    val file = new File("Hotel_Dataset.csv") // just use the filename
     val reader = CSVReader.open(file)
 
     // Read all rows

@@ -5,10 +5,10 @@ import scala.io.Source
 case class Record(
                    id: String, date: String, time: String, customer: String, gender: String,
                    age: String, originCountry: String, state: String, location: String,
-                   destinationCountry: String, destinationCity: String, noOfPeople: String,
+                   destinationCountry: String, destinationCity: String, noOfPeople: Int,
                    checkinDate: String, noOfDays: String, checkoutDate: String, rooms: String,
                    hotelName: String, hotelRating: String, paymentMode: String, bankName: String,
-                   bookingPrice: String, discount: String, gst: String, profitMargin: String
+                   bookingPrice: Double, discount: Double, gst: String, profitMargin: Double
                  )
 
 object HighestBookingCountry {

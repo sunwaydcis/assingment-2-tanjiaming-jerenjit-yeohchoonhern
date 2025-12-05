@@ -16,14 +16,13 @@ object HighestBookingCountry {
 //    val file = new File("Hotel_Dataset.csv") // just use the filename
     val inputStream = getClass.getResourceAsStream("/Hotel_Dataset.csv")
 
-    // read lines from CSV and skip the header
-  //    val lines: List[String] = Source.fromFile(file, "ISO-8859-1").getLines().drop(1).toList
+    // read lines from CSV and skip the header // also ensure reading the right format
     val lines: List[String] = scala.io.Source.fromInputStream(inputStream, "ISO-8859-1").getLines().drop(1).toList
     inputStream.close()
-    // Convert each line into a list of columns
+    // convert each line into a list of columns
     val rows: List[List[String]] = lines.map(line => line.split(",").toList)
 
-    // Skip header and convert to Record objects
+    // skip header and convert to record objects
     val records: List[Record] = rows.flatMap { row =>
       if (row.length >= 24 && row(11).forall(c => c.isDigit)) {   // only process if column 11 is numeric
         Some(Record(

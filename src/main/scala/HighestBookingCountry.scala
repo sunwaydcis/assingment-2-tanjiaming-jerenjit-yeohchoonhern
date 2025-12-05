@@ -13,10 +13,13 @@ case class Record(
 
 object HighestBookingCountry {
   def main(args: Array[String]): Unit = {
-    val file = new File("Hotel_Dataset.csv") // just use the filename
-    // read lines from CSV and skip the header
-    val lines: List[String] = Source.fromFile(file, "ISO-8859-1").getLines().drop(1).toList
+//    val file = new File("Hotel_Dataset.csv") // just use the filename
+    val inputStream = getClass.getResourceAsStream("/Hotel_Dataset.csv")
 
+    // read lines from CSV and skip the header
+  //    val lines: List[String] = Source.fromFile(file, "ISO-8859-1").getLines().drop(1).toList
+    val lines: List[String] = scala.io.Source.fromInputStream(inputStream, "ISO-8859-1").getLines().drop(1).toList
+    inputStream.close()
     // Convert each line into a list of columns
     val rows: List[List[String]] = lines.map(line => line.split(",").toList)
 

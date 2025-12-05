@@ -14,7 +14,8 @@ case class Record(
 object HighestBookingCountry {
   def main(args: Array[String]): Unit = {
     val file = new File("Hotel_Dataset.csv") // just use the filename
-    val reader = CSVReader.open(file)
+    val lines = Source.fromFile(file, "ISO-8859-1").getLines().drop(1).toList
+
 
     // Read all rows
     val rows: List[List[String]] = reader.all()

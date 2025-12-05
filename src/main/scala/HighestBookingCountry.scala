@@ -25,7 +25,7 @@ object HighestBookingCountry {
 
     // Skip header and convert to Record objects
     val records: List[Record] = rows.flatMap { row =>
-      if (row(11).forall(c => c.isDigit)) {   // only process if column 11 is numeric
+      if (row.length >= 24 && row(11).forall(c => c.isDigit)) {   // only process if column 11 is numeric
         Some(Record(
           row(0), row(1), row(2), row(3), row(4), row(5), row(6), row(7),
           row(8), row(9), row(10), row(11).toInt,

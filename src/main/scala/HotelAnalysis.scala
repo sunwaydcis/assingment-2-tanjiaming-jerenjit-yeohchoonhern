@@ -1,6 +1,6 @@
 import scala.io.Source
 
-object BestHotelFinder extends App {
+object HotelAnalysis extends App {
 
   // open CSV file from resources folder
   val inputStream = getClass.getResourceAsStream("/Hotel_Dataset.csv") // format for csv have changed

@@ -14,11 +14,11 @@ case class Record(
 object HighestBookingCountry {
   def main(args: Array[String]): Unit = {
     val file = new File("Hotel_Dataset.csv") // just use the filename
-    val lines = Source.fromFile(file, "ISO-8859-1").getLines().drop(1).toList
+    // read lines from CSV and skip the header
+    val lines: List[String] = Source.fromFile(file, "ISO-8859-1").getLines().drop(1).toList
 
-
-    // Read all rows
-    val rows: List[List[String]] = reader.all()
+    // Convert each line into a list of columns
+    val rows: List[List[String]] = lines.map(line => line.split(",").toList)
 
     // Skip header and convert to Record objects
     val records = rows.tail.map(row => Record(
@@ -35,7 +35,6 @@ object HighestBookingCountry {
     // Find country with max bookings
     val (topCountry, count) = countryCounts.maxBy(_._2)
     println(s"Country with the highest number of bookings: $topCountry ($count bookings)")
-
-    reader.close()
+    
   }
 }

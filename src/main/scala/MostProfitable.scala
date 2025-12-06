@@ -34,7 +34,14 @@ object MostProfitable {
       } else None
     }
   }
-  
+
+  def findMostProfitable(data: List[Booking]): Option[(String, Double)] = {
+    val totalProfits = data.groupBy(_.hotel).map { case (hotel, bookings) =>
+      hotel -> bookings.map(b => b.rooms * b.profitMargin).sum
+    }
+    totalProfits.maxByOption(_._2)
+  }
+
   def main(args: Array[String]): Unit = {
   }
 }

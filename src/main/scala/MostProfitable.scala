@@ -59,8 +59,7 @@ object MostProfitable {
   }
 
   def main(args: Array[String]): Unit = {
+    run()
   }
 }
-
-
 

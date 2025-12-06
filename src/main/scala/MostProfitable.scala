@@ -42,6 +42,22 @@ object MostProfitable {
     totalProfits.maxByOption(_._2)
   }
 
+  def run(): Unit = {
+    val data = loadData()
+    if (data.isEmpty) {
+      println("No data available to compute profits.")
+      return
+    }
+
+    findMostProfitable(data) match {
+      case Some((hotel, profit)) =>
+        println(s"Most Profitable Hotel: $hotel")
+        println(f"Total Profit (rooms × margin): $profit%.2f")
+      case None =>
+        println("Unable to find the most profitable hotel.")
+    }
+  }
+
   def main(args: Array[String]): Unit = {
   }
 }

@@ -43,7 +43,7 @@ object HighestBookingCountry {
 
     // Count bookings per origin country
     val countryCounts = records
-      .groupBy(_.originCountry)
+      .groupBy(_.destinationCountry)
       .view.mapValues(_.size).toMap
 
     // Find country with max bookings

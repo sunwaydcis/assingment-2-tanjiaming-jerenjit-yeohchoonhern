@@ -75,7 +75,11 @@ object HotelAnalysis extends App {
 
     (key, finalScore, avgPrice, avgDiscount, avgProfit)
   }
+  // Find best hotel
+  val best = scored.maxBy(_._2)
 
+  val ((country, city, hotel), score, avgP, avgD, avgPM) = best
+  
   //print the result
   println("Most Economical Hotel:")
   println("Destination     : " + cheapestHotel._2 + ", " + cheapestHotel._1) // UPDATED: Print City & Country

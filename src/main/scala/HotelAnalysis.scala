@@ -37,10 +37,10 @@ object HotelAnalysis extends App {
 
   // find the economical hotel using loop
   var cheapestHotel = bookings.head
-  var minCost = cheapestHotel._3 * (1 - cheapestHotel._4) / cheapestHotel._5
+  var minCost = cheapestHotel._4 * (1 - cheapestHotel._5)
 
   for (hotel <- bookings.tail) {
-    val effectiveCost = hotel._3 * (1 - hotel._4) / hotel._5
+    val effectiveCost = hotel._4 * (1 - hotel._5)
     if (effectiveCost < minCost) {
       cheapestHotel = hotel
       minCost = effectiveCost

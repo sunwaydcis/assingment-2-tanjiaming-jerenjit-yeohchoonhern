@@ -12,7 +12,7 @@ object HotelAnalysis extends App {
   source.close()  // close file after reading
 
   // parse CSV lines into a list of bookings
-  var bookings = List.empty[(String, String, String, Double, Double, Double, Int)] // initialize empty list
+  var bookings = List.empty[(String, String, String, Double, Double, Double)] // initialize empty list
 
   for (line <- lines) {
     val cols = line.split(",")
@@ -29,9 +29,9 @@ object HotelAnalysis extends App {
       val price         = cols(20).toDouble
       val discount      = cols(21).replace("%","").toDouble / 100 // percent to decimal
       val profitMargin  = cols(23).toDouble
-      val numPeople     = cols(11).toInt
+//      val numPeople     = cols(11).toInt
 
-      bookings = bookings :+ (destinationCountry, destinationCity, hotelName, price, discount, profitMargin, numPeople)
+      bookings = bookings :+ (destinationCountry, destinationCity, hotelName, price, discount, profitMargin)
     }
   }
 

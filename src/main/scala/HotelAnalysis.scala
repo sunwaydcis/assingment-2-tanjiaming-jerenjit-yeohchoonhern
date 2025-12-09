@@ -35,12 +35,6 @@ object HotelAnalysis extends App {
     }
   }
 
-  // Define a helper function to prevent division by zero in Min-Max calculation
-  def safeRange(max: Double, min: Double): Double = if (max == min) 1.0 else max - min
-
-  // Key: Composite String (Country|City|HotelName)
-  // Value: (TotalPrice, TotalDiscount, TotalProfitMargin, Count)
-  var aggregateMap = Map.empty[String, (Double, Double, Double, Int)]
   
   // Tuples: _4 = Price, _5 = Discount
   // find the economical hotel using loop

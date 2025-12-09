@@ -37,6 +37,15 @@ object HotelAnalysis extends App {
   }
   // Group by Country + City + Hotel
   val grouped = bookings.groupBy(b => (b.country, b.city, b.hotel))
+
+  // Compute averages
+  val averages = grouped.map { case (key, list) =>
+    val avgPrice = list.map(_.price).sum / list.size
+    val avgDiscount = list.map(_.discount).sum / list.size
+    val avgProfit = list.map(_.profit).sum / list.size
+
+    (key, avgPrice, avgDiscount, avgProfit)
+  }.toList
   
   // Tuples: _4 = Price, _5 = Discount
   // find the economical hotel using loop

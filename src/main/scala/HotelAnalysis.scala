@@ -26,7 +26,7 @@ object HotelAnalysis extends App {
       cols(23).forall(c => c.isDigit || c == '.')) {
 
       Some(Booking(
-        country = cols(6).trim,
+        country = cols(9).trim,
         city = cols(10).trim,
         hotel = cols(16).trim,
         price = cols(20).toDouble,
@@ -79,7 +79,7 @@ object HotelAnalysis extends App {
   val best = scored.maxBy(_._2)
 
   val ((country, city, hotel), score, avgP, avgD, avgPM) = best
-  
+
   //print the result
   println("Most Economical Hotel:")
   println(s"Destination     : $city, $country")

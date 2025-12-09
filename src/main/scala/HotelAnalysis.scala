@@ -34,6 +34,10 @@ object HotelAnalysis extends App {
       bookings = bookings :+ (destinationCountry, destinationCity, hotelName, price, discount, profitMargin)
     }
   }
+
+  // Define a helper function to prevent division by zero in Min-Max calculation
+  def safeRange(max: Double, min: Double): Double = if (max == min) 1.0 else max - min
+  
   // Tuples: _4 = Price, _5 = Discount
   // find the economical hotel using loop
   var cheapestHotel = bookings.head

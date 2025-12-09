@@ -10,11 +10,12 @@ object HotelAnalysis extends App {
   // read all lines and skip the header row
   val lines = source.getLines().drop(1).toList
   source.close()  // close file after reading
+  // Data structure: (country, city, hotel, price, discount, profit)
+  case class Booking(country: String, city: String, hotel: String,
+                     price: Double, discount: Double, profit: Double)
 
   // parse CSV lines into a list of bookings
-  var bookings = List.empty[(String, String, String, Double, Double, Double)] // initialize empty list
-
-  for (line <- lines) {
+  val bookings = lines.flatMap { line =>
     val cols = line.split(",")
 
     // Only process rows with enough columns and valid numeric values
@@ -34,9 +35,6 @@ object HotelAnalysis extends App {
       bookings = bookings :+ (destinationCountry, destinationCity, hotelName, price, discount, profitMargin)
     }
   }
-
-  // a helper function to prevent division by zero
-  def safeRange(max: Double, min: Double): Double = if (max == min) 1.0 else max - min
 
   // Tuples: _4 = Price, _5 = Discount
   // find the economical hotel using loop

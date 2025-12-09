@@ -52,6 +52,14 @@ object HotelAnalysis extends App {
   val discounts = averages.map(_._3)
   val profits = averages.map(_._4)
 
+  val minPrice = prices.min
+  val maxPrice = prices.max
+
+  val minDiscount = discounts.min
+  val maxDiscount = discounts.max
+
+  val minProfit = profits.min
+  val maxProfit = profits.max
   //print the result
   println("Most Economical Hotel:")
   println("Destination     : " + cheapestHotel._2 + ", " + cheapestHotel._1) // UPDATED: Print City & Country

@@ -12,7 +12,7 @@ object HotelAnalysis extends App {
   source.close()  // close file after reading
 
   // parse CSV lines into a list of bookings
-  var bookings = List.empty[(String, String, Double, Double, Double, Int)] // initialize empty list
+  var bookings = List.empty[(String, String, String, Double, Double, Double, Int)] // initialize empty list
 
   for (line <- lines) {
     val cols = line.split(",")

@@ -34,7 +34,7 @@ object HotelAnalysis extends App {
       bookings = bookings :+ (destinationCountry, destinationCity, hotelName, price, discount, profitMargin)
     }
   }
-
+  // Tuples: _4 = Price, _5 = Discount
   // find the economical hotel using loop
   var cheapestHotel = bookings.head
   var minCost = cheapestHotel._4 * (1 - cheapestHotel._5)

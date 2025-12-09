@@ -10,7 +10,7 @@ object HotelAnalysis extends App {
   // read all lines and skip the header row
   val lines = source.getLines().drop(1).toList
   source.close()  // close file after reading
-  
+
   // Data structure: (country, city, hotel, price, discount, profit)
   case class Booking(country: String, city: String, hotel: String,
                      price: Double, discount: Double, profit: Double)
@@ -35,7 +35,9 @@ object HotelAnalysis extends App {
       ))
     } else None
   }
-
+  // Group by Country + City + Hotel
+  val grouped = bookings.groupBy(b => (b.country, b.city, b.hotel))
+  
   // Tuples: _4 = Price, _5 = Discount
   // find the economical hotel using loop
   var cheapestHotel = bookings.head

@@ -65,6 +65,17 @@ object HotelAnalysis extends App {
   def normalize(value: Double, min: Double, max: Double): Double =
     if (max - min == 0) 0 else (1 - ((value - min) / (max - min))) * 100
 
+  // Compute final scores
+  val scored = averages.map { case (key, avgPrice, avgDiscount, avgProfit) =>
+    val priceScore = normalize(avgPrice, minPrice, maxPrice)
+    val discountScore = normalize(avgDiscount, minDiscount, maxDiscount)
+    val profitScore = normalize(avgProfit, minProfit, maxProfit)
+
+    val finalScore = (priceScore + discountScore + profitScore) / 3
+
+    (key, finalScore, avgPrice, avgDiscount, avgProfit)
+  }
+
   //print the result
   println("Most Economical Hotel:")
   println("Destination     : " + cheapestHotel._2 + ", " + cheapestHotel._1) // UPDATED: Print City & Country

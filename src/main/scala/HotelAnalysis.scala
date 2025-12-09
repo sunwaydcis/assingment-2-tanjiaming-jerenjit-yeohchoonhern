@@ -10,6 +10,7 @@ object HotelAnalysis extends App {
   // read all lines and skip the header row
   val lines = source.getLines().drop(1).toList
   source.close()  // close file after reading
+  
   // Data structure: (country, city, hotel, price, discount, profit)
   case class Booking(country: String, city: String, hotel: String,
                      price: Double, discount: Double, profit: Double)
@@ -24,16 +25,15 @@ object HotelAnalysis extends App {
       cols(21).forall(c => c.isDigit || c == '%') &&
       cols(23).forall(c => c.isDigit || c == '.')) {
 
-      val destinationCountry = cols(6).trim
-      val destinationCity    = cols(10).trim // UPDATED: Get City from Index 10
-      val hotelName     = cols(16).trim
-      val price         = cols(20).toDouble
-      val discount      = cols(21).replace("%","").toDouble / 100 // percent to decimal
-      val profitMargin  = cols(23).toDouble
-//      val numPeople     = cols(11).toInt
-
-      bookings = bookings :+ (destinationCountry, destinationCity, hotelName, price, discount, profitMargin)
-    }
+      Some(Booking(
+        country = cols(6).trim,
+        city = cols(10).trim,
+        hotel = cols(16).trim,
+        price = cols(20).toDouble,
+        discount = cols(21).replace("%", "").toDouble / 100,
+        profit = cols(23).toDouble
+      ))
+    } else None
   }
 
   // Tuples: _4 = Price, _5 = Discount

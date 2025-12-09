@@ -23,14 +23,14 @@ object HotelAnalysis extends App {
       cols(21).forall(c => c.isDigit || c == '%') &&
       cols(23).forall(c => c.isDigit || c == '.')) {
 
-      val originCountry = cols(6).trim
+      val destinationCountry = cols(6).trim
       val hotelName     = cols(16).trim
       val price         = cols(20).toDouble
       val discount      = cols(21).replace("%","").toDouble / 100 // percent to decimal
       val profitMargin  = cols(23).toDouble
       val numPeople     = cols(11).toInt
 
-      bookings = bookings :+ (originCountry, hotelName, price, discount, profitMargin, numPeople)
+      bookings = bookings :+ (destinationCountry, hotelName, price, discount, profitMargin, numPeople)
     }
   }
 

@@ -31,7 +31,7 @@ object HotelAnalysis extends App {
       val profitMargin  = cols(23).toDouble
       val numPeople     = cols(11).toInt
 
-      bookings = bookings :+ (destinationCountry, hotelName, price, discount, profitMargin, numPeople)
+      bookings = bookings :+ (destinationCountry, destinationCity, hotelName, price, discount, profitMargin, numPeople)
     }
   }
 

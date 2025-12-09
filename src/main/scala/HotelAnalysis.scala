@@ -24,6 +24,7 @@ object HotelAnalysis extends App {
       cols(23).forall(c => c.isDigit || c == '.')) {
 
       val destinationCountry = cols(6).trim
+      val destinationCity    = cols(10).trim // UPDATED: Get City from Index 10
       val hotelName     = cols(16).trim
       val price         = cols(20).toDouble
       val discount      = cols(21).replace("%","").toDouble / 100 // percent to decimal

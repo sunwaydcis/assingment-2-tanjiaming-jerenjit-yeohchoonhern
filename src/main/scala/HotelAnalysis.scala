@@ -46,19 +46,11 @@ object HotelAnalysis extends App {
 
     (key, avgPrice, avgDiscount, avgProfit)
   }.toList
-  
-  // Tuples: _4 = Price, _5 = Discount
-  // find the economical hotel using loop
-  var cheapestHotel = bookings.head
-  var minCost = cheapestHotel._4 * (1 - cheapestHotel._5)
 
-  for (hotel <- bookings.tail) {
-    val effectiveCost = hotel._4 * (1 - hotel._5)
-    if (effectiveCost < minCost) {
-      cheapestHotel = hotel
-      minCost = effectiveCost
-    }
-  }
+  // Extract min/max for normalization
+  val prices = averages.map(_._2)
+  val discounts = averages.map(_._3)
+  val profits = averages.map(_._4)
 
   //print the result
   println("Most Economical Hotel:")

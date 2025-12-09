@@ -49,8 +49,10 @@ object HotelAnalysis extends App {
 
   //print the result
   println("Most Economical Hotel:")
-  println("Hotel Name   : " + cheapestHotel._2)
-  println(f"Booking Price: ${cheapestHotel._3}%.2f SGD")
-  println(f"Discount     : ${cheapestHotel._4 * 100}%.0f%%")
-  println(f"Profit Margin: ${cheapestHotel._5}%.2f")
+  println("Destination     : " + cheapestHotel._2 + ", " + cheapestHotel._1) // UPDATED: Print City & Country
+  println("Hotel Name      : " + cheapestHotel._3)
+  println(f"Booking Price   : ${cheapestHotel._4}%.2f SGD")
+  println(f"Discount        : ${cheapestHotel._5 * 100}%.0f%%")
+  println(f"Total Cost      : $minCost%.2f SGD")
+  println(f"Profit Margin   : ${cheapestHotel._6}%.2f")
 }

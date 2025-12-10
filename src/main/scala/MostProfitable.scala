@@ -57,9 +57,9 @@ object MostProfitable {
         println("Unable to find the most profitable hotel.")
     }
   }
-
-  def main(args: Array[String]): Unit = {
-    run()
-  }
+//
+//  def main(args: Array[String]): Unit = {
+//    run()
+//  }
 }
 

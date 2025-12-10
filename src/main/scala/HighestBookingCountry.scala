@@ -12,7 +12,7 @@ case class Record(
                  )
 
 object HighestBookingCountry {
-  def main(args: Array[String]): Unit = {
+  def run(): Unit = {
 //    val file = new File("Hotel_Dataset.csv") // just use the filename
     val inputStream = getClass.getResourceAsStream("/Hotel_Dataset.csv")
 

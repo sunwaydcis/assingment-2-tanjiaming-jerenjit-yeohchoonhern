@@ -1,65 +1,56 @@
 import scala.io.Source
-import scala.util.{Try, Success, Failure}
+import scala.util.Try
 
 object MostProfitable extends AnalysisTask {
-  
-  case class Booking(hotel: String, rooms: Int, profitMargin: Double)
+  override def run(): Unit = {
 
-  def toIntSafe(s: String): Int = Try(s.trim.toInt).getOrElse(0)
-  def toDoubleSafe(s: String): Double = Try(s.trim.toDouble).getOrElse(0.0)
+    // Case class to store hotel info relevant for profit calculation
+    case class Booking(hotel: String, rooms: Int, profitMargin: Double)
 
-  def loadData(): List[Booking] = {
+    // Helper functions to safely convert strings to numbers
+    def toIntSafe(s: String): Int = Try(s.trim.toInt).getOrElse(0)
+
+    def toDoubleSafe(s: String): Double = Try(s.trim.toDouble).getOrElse(0.0)
+
+    // Load CSV file
     val inputStream = getClass.getResourceAsStream("/Hotel_Dataset.csv")
     if (inputStream == null) {
-      println("CSV file not found!")
-      return List.empty
+      println("CSV file not found!"); return
     }
 
     val lines = Source.fromInputStream(inputStream, "ISO-8859-1").getLines().toList
-    inputStream.close()
+    inputStream.close() // close file stream
 
-    if (lines.isEmpty) {
-      println("CSV is empty!")
-      return List.empty
-    }
-
-    lines.tail.flatMap { line =>
+    // Parse CSV lines into Booking objects
+    val data: List[Booking] = lines.tail.flatMap { line =>
       val cols = line.split(",").map(_.trim)
       if (cols.length >= 24) {
         Some(Booking(
-          hotel = cols(16),
-          rooms = toIntSafe(cols(15)),
-          profitMargin = toDoubleSafe(cols(23))
+          hotel = cols(16), // hotel name
+          rooms = toIntSafe(cols(15)), // number of rooms booked
+          profitMargin = toDoubleSafe(cols(23)) // profit margin per booking
         ))
-      } else None
+      } else None // skip invalid rows
     }
-  }
 
-  def findMostProfitable(data: List[Booking]): Option[(String, Double)] = {
-    val totalProfits = data.groupBy(_.hotel).map { case (hotel, bookings) =>
-      hotel -> bookings.map(b => b.rooms * b.profitMargin).sum
-    }
-    totalProfits.maxByOption(_._2)
-  }
-
-  override def run(): Unit = {
-    val data = loadData()
     if (data.isEmpty) {
-      println("No data available to compute profits.")
-      return
+      println("No data available"); return
     }
 
-    findMostProfitable(data) match {
-      case Some((hotel, profit)) =>
-        println(s"Most Profitable Hotel: $hotel")
-        println(f"Total Profit (rooms × margin): $profit%.2f")
-      case None =>
-        println("Unable to find the most profitable hotel.")
-    }
+    // Compute total profit per hotel (rooms × profit margin)
+    val hotelProfits: Map[String, Double] = data
+      .groupBy(_.hotel)
+      .view
+      .mapValues(bookings => bookings.map(b => b.rooms * b.profitMargin).sum)
+      .toMap
+
+    // Find hotel with highest total profit
+    val (hotel, profit) = hotelProfits.maxBy(_._2)
+
+    // Print results
+    println("===== Q3: Most Profitable Hotel =====")
+    println(s"Hotel: $hotel")
+    println(f"Total Profit (rooms × margin): $profit%.2f")
+    println("=" * 40)
   }
-//
-//  def main(args: Array[String]): Unit = {
-//    run()
-//  }
 }
-

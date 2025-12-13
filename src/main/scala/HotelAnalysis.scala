@@ -1,10 +1,9 @@
 import scala.io.Source
 
-object HotelAnalysis extends App {
-  def run(): Unit = {
-
-
-    // open CSV file from resources folder
+object HotelAnalysis extends AnalysisTask {
+  override def run(): Unit = {
+    
+        // open CSV file from resources folder
     val inputStream = getClass.getResourceAsStream("/Hotel_Dataset.csv") // format for csv have changed
     if (inputStream == null) throw new Exception("CSV file not found!") // stop if missing
     val source = Source.fromInputStream(inputStream, "ISO-8859-1") // read as UTF-8 to prevent error when reading

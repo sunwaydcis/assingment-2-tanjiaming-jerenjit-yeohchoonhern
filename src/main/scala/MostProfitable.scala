@@ -1,8 +1,8 @@
 import scala.io.Source
 import scala.util.{Try, Success, Failure}
 
-object MostProfitable {
-
+object MostProfitable extends AnalysisTask {
+  
   case class Booking(hotel: String, rooms: Int, profitMargin: Double)
 
   def toIntSafe(s: String): Int = Try(s.trim.toInt).getOrElse(0)
@@ -42,7 +42,7 @@ object MostProfitable {
     totalProfits.maxByOption(_._2)
   }
 
-  def run(): Unit = {
+  override def run(): Unit = {
     val data = loadData()
     if (data.isEmpty) {
       println("No data available to compute profits.")

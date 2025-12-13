@@ -11,9 +11,10 @@ case class Record(
                    bookingPrice: Double, discount: Double, gst: String, profitMargin: Double
                  )
 
-object HighestBookingCountry {
-  def run(): Unit = {
-//    val file = new File("Hotel_Dataset.csv") // just use the filename
+object HighestBookingCountry extends AnalysisTask {
+  override def run(): Unit = {
+
+        //    val file = new File("Hotel_Dataset.csv") // just use the filename
     val inputStream = getClass.getResourceAsStream("/Hotel_Dataset.csv")
 
     // read lines from CSV and skip the header // also ensure reading the right format

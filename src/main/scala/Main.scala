@@ -1,13 +1,16 @@
 object Main {
-  def main(args: Array[String]): Unit = { // polymorphyism in q123, abstract run in q123, forloop for main
-    println("Running HighestBookingCountry...")
-    HighestBookingCountry.run()
+  def main(args: Array[String]): Unit = {
 
-    println("\nRunning HotelAnalysis...")
-    HotelAnalysis.run()
+    val tasks: List[AnalysisTask] = List(
+      HighestBookingCountry,
+      HotelAnalysis,
+      MostProfitable
+    )
 
-    println("\nRunning MostProfitable...")
-    MostProfitable.run()
-
+    for (task <- tasks) {
+      println(s"Running ${task.getClass.getSimpleName}")
+      task.run()
+      println("-" * 40)
+    }
   }
 }
